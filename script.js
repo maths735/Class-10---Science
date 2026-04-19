@@ -1,78 +1,32 @@
-let score = 0;
-let attempted = 0;
-let currentQuestion = null;
-
-async function generateQuestion() {
-  const chapter = document.getElementById("chapter").value;
-
+document.getElementById("generateBtn").onclick = async () => {
   try {
-    const res = await fetch('/api/generate', {
+    const res = await fetch('/api/generate', { 
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chapter })
+      body: JSON.stringify({ chapter: "all" })
     });
 
     const q = await res.json();
 
     if (q.error) {
-      alert("Error: " + q.error);
+      document.getElementById("question").innerHTML = "<strong>Error:</strong> " + q.error;
       return;
     }
 
-    currentQuestion = q;
-    displayQuestion(q);
+    document.getElementById("question").innerHTML = `<strong>${q.title}</strong><br>${q.text}`;
+
+    const optionsDiv = document.getElementById("options");
+    optionsDiv.innerHTML = "";
+    if (q.options) {
+      q.options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.textContent = opt;
+        btn.style.margin = "5px";
+        btn.onclick = () => alert(opt === q.answer ? "Correct!" : "Incorrect. Answer is " + q.answer);
+        optionsDiv.appendChild(btn);
+      });
+    }
   } catch (e) {
-    alert("Cannot connect to backend. Please redeploy the project.");
+    document.getElementById("question").innerHTML = "Backend connection failed. Please redeploy.";
   }
-}
-
-function displayQuestion(q) {
-  document.getElementById("qTitle").textContent = q.title || "Question";
-  document.getElementById("questionText").textContent = q.text;
-
-  const optionsDiv = document.getElementById("options");
-  optionsDiv.innerHTML = "";
-  document.getElementById("inputArea").style.display = "none";
-
-  if (q.type === "mcq" && q.options) {
-    q.options.forEach(opt => {
-      const div = document.createElement("div");
-      div.textContent = opt;
-      div.onclick = () => checkAnswer(opt);
-      optionsDiv.appendChild(div);
-    });
-  } else {
-    document.getElementById("inputArea").style.display = "block";
-  }
-}
-
-function checkAnswer(selected) {
-  attempted++;
-  document.getElementById("attempted").textContent = attempted;
-
-  const isCorrect = String(selected).trim().toLowerCase() === String(currentQuestion.answer).trim().toLowerCase();
-
-  if (isCorrect) score++;
-  document.getElementById("score").textContent = score;
-
-  showResult(isCorrect);
-}
-
-function showResult(isCorrect) {
-  const resultDiv = document.getElementById("result");
-  resultDiv.style.display = "block";
-  resultDiv.className = `result ${isCorrect ? 'correct' : 'incorrect'}`;
-  resultDiv.innerHTML = isCorrect ? 
-    "<strong>Correct!</strong>" : 
-    `<strong>Incorrect</strong><br>Correct Answer: ${currentQuestion.answer}<br><br><strong>Explanation:</strong> ${currentQuestion.explanation || ''}`;
-}
-
-document.getElementById("generateBtn").onclick = generateQuestion;
-document.getElementById("submitAnswer").onclick = () => {
-  const ans = document.getElementById("userAnswer").value.trim();
-  if (ans) checkAnswer(ans);
 };
-
-document.getElementById("nextBtn").onclick = generateQuestion;
-
-window.onload = generateQuestion;
