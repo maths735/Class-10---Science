@@ -10,7 +10,7 @@
   <div class="container">
     <header>
       <h1>Class 10 Science Board Exam Practice</h1>
-      <p>Real AI Question Generator</p>
+      <p>Real AI Question Generator - Fresh questions every time</p>
     </header>
 
     <div class="controls">
@@ -23,21 +23,21 @@
       <button id="generateBtn">Generate New Question</button>
     </div>
 
-    <div id="questionArea">
+    <div id="questionArea" class="question-area">
       <h2 id="qTitle"></h2>
       <p id="questionText"></p>
-      <div id="options"></div>
-      <div id="inputArea" style="display:none; margin-top:15px;">
-        <input type="text" id="userAnswer" placeholder="Enter your answer" style="width:100%; padding:10px;">
-        <button id="submitAnswer" style="margin-top:10px;">Submit Answer</button>
+      <div id="options" class="options"></div>
+      <div id="inputArea" style="display:none;">
+        <input type="text" id="userAnswer" placeholder="Type your answer here">
+        <button id="submitAnswer">Submit Answer</button>
       </div>
     </div>
 
-    <div id="result" style="display:none; margin:20px 0; padding:15px; border:2px solid #333;"></div>
+    <div id="result" class="result" style="display:none;"></div>
 
     <div class="stats">
-      Score: <span id="score">0</span> | Attempted: <span id="attempted">0</span>
-      <button id="nextBtn" style="display:none; margin-left:20px;">Next Question</button>
+      <p>Score: <span id="score">0</span> | Attempted: <span id="attempted">0</span></p>
+      <button id="nextBtn" style="display:none;">Next Question</button>
     </div>
   </div>
 
