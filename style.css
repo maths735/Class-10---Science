@@ -1,0 +1,66 @@
+body {
+  font-family: 'Courier New', monospace;
+  background: #f0f0f0;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  padding: 30px;
+  border: 3px solid #333;
+  border-radius: 8px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.controls {
+  margin: 20px 0;
+  display: flex;
+  gap: 10px;
+}
+
+select, button {
+  padding: 10px;
+  font-size: 16px;
+}
+
+button {
+  background: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #555;
+}
+
+#questionText {
+  font-size: 18px;
+  margin: 20px 0;
+}
+
+.option {
+  padding: 12px;
+  border: 2px solid #555;
+  margin: 8px 0;
+  cursor: pointer;
+}
+
+.option:hover {
+  background: #f0f0f0;
+}
+
+.result {
+  border: 3px solid #333;
+  padding: 15px;
+}
+
+.correct { background: #d4edda; }
+.incorrect { background: #f8d7da; }
