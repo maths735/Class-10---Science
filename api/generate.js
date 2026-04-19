@@ -1,20 +1,25 @@
 export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
 
   const apiKey = process.env.XAI_API_KEY;
-  if (!apiKey) return res.status(500).json({ error: 'API key not set' });
+  if (!apiKey) {
+    return res.status(500).json({ error: 'XAI_API_KEY not configured' });
+  }
 
   const { chapter } = req.body;
 
-  const prompt = `Generate one fresh CBSE Class 10 Science board exam question.
-Category: ${chapter === "all" ? "any topic" : chapter}
-Return ONLY JSON:
+  const prompt = `You are a CBSE Class 10 Science expert. Generate ONE fresh board-style question.
+Category: ${chapter === "all" ? "any science topic" : chapter}
+Return ONLY valid JSON, no extra text:
+
 {
-  "title": "short topic",
-  "text": "full question",
+  "title": "short topic name",
+  "text": "full question text",
   "type": "mcq",
-  "options": ["A", "B", "C", "D"],
-  "answer": "correct one",
+  "options": ["opt1", "opt2", "opt3", "opt4"],
+  "answer": "exact correct answer",
   "explanation": "short explanation"
 }`;
 
@@ -37,8 +42,8 @@ Return ONLY JSON:
     const jsonMatch = content.match(/\{[\s\S]*\}/);
     const question = jsonMatch ? JSON.parse(jsonMatch[0]) : null;
 
-    res.status(200).json(question || { error: "Failed to generate question" });
+    res.status(200).json(question || { error: "Failed to generate" });
   } catch (error) {
-    res.status(500).json({ error: "AI service error" });
+    res.status(500).json({ error: "AI generation failed" });
   }
 }
