@@ -11,19 +11,27 @@ async function generateQuestion(selectedChapter) {
       body: JSON.stringify({ chapter: selectedChapter })
     });
 
-    if (!res.ok) throw new Error('Failed to fetch question');
+    if (!res.ok) {
+      throw new Error('Backend returned error');
+    }
+
     const q = await res.json();
+
+    if (q.error) {
+      throw new Error(q.error);
+    }
 
     currentQuestion = q;
     return q;
   } catch (e) {
-    alert('Backend error. Make sure the site is deployed on Vercel.');
+    console.error(e);
+    alert('Error: ' + e.message + '\n\nMake sure the backend is deployed correctly on Vercel.');
     return null;
   }
 }
 
 function displayQuestion(q) {
-  document.getElementById("qTitle").textContent = q.title || 'Science Question';
+  document.getElementById("qTitle").textContent = q.title || "Science Question";
   document.getElementById("questionText").textContent = q.text;
 
   const optionsDiv = document.getElementById("options");
@@ -94,7 +102,7 @@ document.getElementById("nextBtn").onclick = () => {
   document.getElementById("generateBtn").click();
 };
 
-// Auto load first question
+// Load first question
 window.onload = () => {
   document.getElementById("generateBtn").click();
 };
