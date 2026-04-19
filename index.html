@@ -3,17 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Class 10 Science Practice</title>
+  <title>Class 10 Science Board Practice</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1>Class 10 Science Board Exam Practice</h1>
-    <p>Real AI Question Generator</p>
+    <header>
+      <h1>Class 10 Science Board Exam Practice</h1>
+      <p>Smart Question Generator</p>
+    </header>
 
     <div class="controls">
       <select id="chapter">
-        <option value="all">All Topics</option>
+        <option value="all">All Topics (Mixed)</option>
         <option value="physics">Physics</option>
         <option value="chemistry">Chemistry</option>
         <option value="biology">Biology</option>
@@ -21,19 +23,22 @@
       <button id="generateBtn">Generate New Question</button>
     </div>
 
-    <div id="questionArea">
+    <div id="questionArea" class="question-area">
       <h2 id="qTitle"></h2>
       <p id="questionText"></p>
-      <div id="options"></div>
+      <div id="options" class="options"></div>
       <div id="inputArea" style="display:none;">
-        <input type="text" id="userAnswer" placeholder="Your answer">
-        <button id="submitAnswer">Submit</button>
+        <input type="text" id="userAnswer" placeholder="Type your answer">
+        <button id="submitAnswer">Submit Answer</button>
       </div>
     </div>
 
-    <div id="result" style="display:none; padding:15px; border:2px solid black; margin:20px 0;"></div>
+    <div id="result" class="result" style="display:none;"></div>
 
-    <p>Score: <span id="score">0</span> | Attempted: <span id="attempted">0</span></p>
+    <div class="stats">
+      Score: <span id="score">0</span> | Attempted: <span id="attempted">0</span>
+      <button id="nextBtn" style="display:none;">Next Question</button>
+    </div>
   </div>
 
   <script src="script.js"></script>
