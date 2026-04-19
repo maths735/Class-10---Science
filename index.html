@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class 10 Science Practice</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Class 10 Science Board Exam Practice</h1>
+    <p>Real AI Question Generator</p>
+
+    <div class="controls">
+      <select id="chapter">
+        <option value="all">All Topics</option>
+        <option value="physics">Physics</option>
+        <option value="chemistry">Chemistry</option>
+        <option value="biology">Biology</option>
+      </select>
+      <button id="generateBtn">Generate New Question</button>
+    </div>
+
+    <div id="questionArea">
+      <h2 id="qTitle"></h2>
+      <p id="questionText"></p>
+      <div id="options"></div>
+      <div id="inputArea" style="display:none;">
+        <input type="text" id="userAnswer" placeholder="Your answer">
+        <button id="submitAnswer">Submit</button>
+      </div>
+    </div>
+
+    <div id="result" style="display:none; padding:15px; border:2px solid black; margin:20px 0;"></div>
+
+    <p>Score: <span id="score">0</span> | Attempted: <span id="attempted">0</span></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
