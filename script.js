@@ -1,5 +1,6 @@
 let score = 0;
 let attempted = 0;
+let currentQuestion = null;
 
 async function generateQuestion() {
   const chapter = document.getElementById("chapter").value;
@@ -18,9 +19,10 @@ async function generateQuestion() {
       return;
     }
 
+    currentQuestion = q;
     displayQuestion(q);
   } catch (e) {
-    alert("Backend not responding. Please wait a moment and try again.");
+    alert("Cannot connect to backend. Please redeploy the project.");
   }
 }
 
@@ -30,12 +32,13 @@ function displayQuestion(q) {
 
   const optionsDiv = document.getElementById("options");
   optionsDiv.innerHTML = "";
+  document.getElementById("inputArea").style.display = "none";
 
   if (q.type === "mcq" && q.options) {
     q.options.forEach(opt => {
       const div = document.createElement("div");
       div.textContent = opt;
-      div.onclick = () => checkAnswer(opt, q.answer);
+      div.onclick = () => checkAnswer(opt);
       optionsDiv.appendChild(div);
     });
   } else {
@@ -43,29 +46,31 @@ function displayQuestion(q) {
   }
 }
 
-function checkAnswer(selected, correct) {
+function checkAnswer(selected) {
   attempted++;
   document.getElementById("attempted").textContent = attempted;
-  const isCorrect = String(selected).trim().toLowerCase() === String(correct).trim().toLowerCase();
+
+  const isCorrect = String(selected).trim().toLowerCase() === String(currentQuestion.answer).trim().toLowerCase();
+
   if (isCorrect) score++;
   document.getElementById("score").textContent = score;
 
-  showResult(isCorrect, correct);
+  showResult(isCorrect);
 }
 
-function showResult(isCorrect, correctAnswer) {
+function showResult(isCorrect) {
   const resultDiv = document.getElementById("result");
   resultDiv.style.display = "block";
   resultDiv.className = `result ${isCorrect ? 'correct' : 'incorrect'}`;
   resultDiv.innerHTML = isCorrect ? 
     "<strong>Correct!</strong>" : 
-    `<strong>Incorrect</strong><br>Correct Answer: ${correctAnswer}`;
+    `<strong>Incorrect</strong><br>Correct Answer: ${currentQuestion.answer}<br><br><strong>Explanation:</strong> ${currentQuestion.explanation || ''}`;
 }
 
 document.getElementById("generateBtn").onclick = generateQuestion;
 document.getElementById("submitAnswer").onclick = () => {
   const ans = document.getElementById("userAnswer").value.trim();
-  if (ans) checkAnswer(ans, currentQuestion.answer);
+  if (ans) checkAnswer(ans);
 };
 
 document.getElementById("nextBtn").onclick = generateQuestion;
