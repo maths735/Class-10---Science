@@ -1,0 +1,8 @@
+{
+  "name": "class-10-science-practice",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev"
+  }
+}
