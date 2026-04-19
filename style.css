@@ -1,7 +1,8 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
 body {
-  font-family: 'Courier New', monospace;
-  background: #f0f0f0;
-  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  background: #f4f4f4;
   padding: 20px;
 }
 
@@ -9,58 +10,74 @@ body {
   max-width: 800px;
   margin: 0 auto;
   background: white;
-  padding: 30px;
-  border: 3px solid #333;
+  border: 3px solid #222;
   border-radius: 8px;
+  overflow: hidden;
 }
 
-h1 {
+header {
+  background: #222;
+  color: white;
+  padding: 25px;
   text-align: center;
-  margin-bottom: 10px;
 }
 
 .controls {
-  margin: 20px 0;
+  padding: 20px;
+  background: #f9f9f9;
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 select, button {
-  padding: 10px;
+  padding: 12px;
   font-size: 16px;
+  border: 2px solid #222;
 }
 
 button {
-  background: #333;
+  background: #222;
   color: white;
-  border: none;
   cursor: pointer;
 }
 
-button:hover {
-  background: #555;
+button:hover { background: #444; }
+
+.question-area {
+  padding: 30px;
+  min-height: 250px;
 }
 
 #questionText {
-  font-size: 18px;
+  font-size: 1.2rem;
   margin: 20px 0;
+  white-space: pre-wrap;
 }
 
-.option {
-  padding: 12px;
+.options div {
+  padding: 14px;
   border: 2px solid #555;
   margin: 8px 0;
   cursor: pointer;
 }
 
-.option:hover {
+.options div:hover {
   background: #f0f0f0;
 }
 
 .result {
-  border: 3px solid #333;
-  padding: 15px;
+  margin: 20px;
+  padding: 20px;
+  border: 3px solid #222;
+  font-size: 1.1rem;
 }
 
-.correct { background: #d4edda; }
-.incorrect { background: #f8d7da; }
+.correct { background: #d4edda; border-color: #006600; }
+.incorrect { background: #f8d7da; border-color: #660000; }
+
+.stats {
+  padding: 20px;
+  text-align: center;
+  background: #f9f9f9;
+}
