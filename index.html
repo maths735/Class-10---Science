@@ -3,43 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Class 10 Science Board Practice</title>
+  <title>Class 10 Science Practice</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Class 10 Science Board Exam Practice</h1>
-      <p>Real Grok AI Question Generator</p>
-    </header>
+  <h1>Class 10 Science Board Exam Practice</h1>
+  <p>Real AI Question Generator</p>
 
-    <div class="controls">
-      <select id="chapter">
-        <option value="all">All Topics (Mixed)</option>
-        <option value="physics">Physics</option>
-        <option value="chemistry">Chemistry</option>
-        <option value="biology">Biology</option>
-      </select>
-      <button id="generateBtn">Generate New Question</button>
-    </div>
+  <select id="chapter">
+    <option value="all">All Topics</option>
+    <option value="physics">Physics</option>
+    <option value="chemistry">Chemistry</option>
+    <option value="biology">Biology</option>
+  </select>
+  <button id="generateBtn">Generate New Question</button>
 
-    <div id="questionArea" class="question-area">
-      <h2 id="qTitle"></h2>
-      <p id="questionText"></p>
-      <div id="options" class="options"></div>
-      <div id="inputArea" style="display:none;">
-        <input type="text" id="userAnswer" placeholder="Type your answer">
-        <button id="submitAnswer">Submit Answer</button>
-      </div>
-    </div>
+  <div id="question" style="margin-top:30px; font-size:18px;"></div>
+  <div id="options" style="margin-top:20px;"></div>
+  <div id="result" style="margin-top:30px; padding:15px; border:2px solid black; display:none;"></div>
 
-    <div id="result" class="result" style="display:none;"></div>
-
-    <div class="stats">
-      Score: <span id="score">0</span> | Attempted: <span id="attempted">0</span>
-      <button id="nextBtn" style="display:none;">Next Question</button>
-    </div>
-  </div>
+  <p>Score: <span id="score">0</span> | Attempted: <span id="attempted">0</span></p>
 
   <script src="script.js"></script>
 </body>
